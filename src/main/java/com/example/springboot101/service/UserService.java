@@ -1,21 +1,10 @@
 package com.example.springboot101.service;
 
-import com.example.springboot101.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserService {
 
-    /**
-     * 注册用户
-     * @param username 用户名
-     * @param rawPassword 原始密码
-     */
-    void register(String username, String rawPassword);
+    void register(String username, String password, String captcha, HttpServletRequest request); // 注册方法
 
-    /**
-     * 登录校验
-     * @param username 用户名
-     * @param rawPassword 原始密码
-     * @return 如果验证通过，返回对应User信息；否则抛出异常
-     */
-    User login(String username, String rawPassword);
+    String login(String username, String password); // 登录方法，返回生成的 JWT Token
 }
