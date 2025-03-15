@@ -18,6 +18,10 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
+    // 新增角色字段，默认普通用户
+    @Column(nullable = false, length = 20)
+    private String role = "ROLE_USER";
+
     public User() {
     }
 
@@ -46,5 +50,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // 新增 Getter 和 Setter
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 }
