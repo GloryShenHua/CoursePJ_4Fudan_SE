@@ -10,6 +10,7 @@ import com.example.springboot101.repository.UserRepository;
 import com.example.springboot101.service.UserService;
 import com.example.springboot101.util.JwtUtil;  // 导入 JwtUtil 类
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    // 注入我们在 SecurityConfig 中定义的 Bean
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     // 用户注册逻辑，确保签名与接口一致
     @Override
@@ -44,8 +49,11 @@ public class UserServiceImpl implements UserService {
             throw new UsernameAlreadyExistsException("Username already exists: " + username);
         }
 
+        // 4. 对密码进行加密存储 (BCrypt)
+        String encodedPass = passwordEncoder.encode(password);
+
         // 注册用户
-        User user = new User(username, password);
+        User user = new User(username, encodedPass);
         userRepository.save(user);
     }
 
@@ -58,9 +66,10 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User not found: " + username);
         }
 
-        // 校验密码
-        if (!user.getPassword().equals(password)) {
-            throw new InvalidPasswordException("Incorrect password for user: " + username);
+        // 2. 校验密码 (BCrypt)
+        // user.getPassword() 是数据库里加密后的哈希
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new InvalidPasswordException("Incorrect password");
         }
 
         // 生成 JWT Token 使用 JwtUtil 生成 Token
