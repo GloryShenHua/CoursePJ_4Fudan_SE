@@ -58,6 +58,62 @@ function register() {
     });
 }
 
+// 检查密码强度
+function checkPasswordStrength(password) {
+    const strengthElement = document.getElementById('passwordStrength');
+    
+    // 如果密码长度小于6
+    if (password.length < 6) {
+        strengthElement.className = 'password-strength strength-invalid';
+        strengthElement.textContent = '密码长度至少6位';
+        return;
+    }
+
+    // 计算密码强度
+    let strength = 0;
+    
+    // 检查是否包含数字
+    if (/\d/.test(password)) {
+        strength += 1;
+    }
+    
+    // 检查是否包含小写字母
+    if (/[a-z]/.test(password)) {
+        strength += 1;
+    }
+    
+    // 检查是否包含大写字母
+    if (/[A-Z]/.test(password)) {
+        strength += 1;
+    }
+    
+    // 检查是否包含特殊字符
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        strength += 1;
+    }
+    
+    // 根据强度显示不同的提示
+    strengthElement.className = 'password-strength';
+    switch (strength) {
+        case 1:
+            strengthElement.className += ' strength-weak';
+            strengthElement.textContent = '密码强度：弱';
+            break;
+        case 2:
+            strengthElement.className += ' strength-medium';
+            strengthElement.textContent = '密码强度：中';
+            break;
+        case 3:
+        case 4:
+            strengthElement.className += ' strength-strong';
+            strengthElement.textContent = '密码强度：强';
+            break;
+        default:
+            strengthElement.className += ' strength-invalid';
+            strengthElement.textContent = '密码需包含字母和数字';
+    }
+}
+
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
     // 刷新验证码
@@ -69,5 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('registerForm').addEventListener('submit', function(e) {
         e.preventDefault();
         register();
+    });
+    
+    // 添加密码输入监听
+    document.getElementById('password').addEventListener('input', function(e) {
+        checkPasswordStrength(e.target.value);
     });
 });

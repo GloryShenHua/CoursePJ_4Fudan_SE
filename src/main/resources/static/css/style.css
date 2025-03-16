@@ -96,3 +96,30 @@ button:hover {
 .link a:hover {
     text-decoration: underline;
 }
+
+.password-strength {
+    margin-top: 5px;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.strength-weak {
+    color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.strength-medium {
+    color: #ffc107;
+    background-color: #fff3cd;
+}
+
+.strength-strong {
+    color: #28a745;
+    background-color: #d4edda;
+}
+
+.strength-invalid {
+    color: #6c757d;
+    background-color: #e9ecef;
+}
