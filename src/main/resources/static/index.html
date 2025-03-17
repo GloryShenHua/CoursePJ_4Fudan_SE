@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .welcome-container {
+            text-align: center;
+            padding: 20px;
+        }
+        .btn-logout {
+            margin-top: 20px;
+            width: auto;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-container">
+            <h2>欢迎访问</h2>
+            <div id="userInfo">
+                请先<a href="login.html">登录</a>或<a href="register.html">注册</a>
+            </div>
+            <div id="loggedInContent" style="display: none;">
+                <p>您已成功登录！</p>
+                <button id="logoutBtn" class="btn-logout">退出登录</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/index.js"></script>
+</body>
+</html>
