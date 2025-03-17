@@ -2,9 +2,28 @@
 
 ## 代码框架
 
+### 前端部分
+
+以下为代码结构：
+
+- src/
+  - main/
+    - resources/
+      -  static/	(静态资源根目录)
+        - css/ 	(样式文件目录）
+          - style.css 	(全局样式）
+        -  js/       (JavaScript文件目录)
+          - index.js	(首页相关功能)
+          - login.js 	(登录相关功能）
+          - register.js     (注册相关功能)
+        - index.html
+        - login.html
+        - register.html
+
 ### 后端部分
 
 以下是代码结构：  
+
 - src/
     - main/
         - java/
